@@ -26,3 +26,44 @@ class TestTable(TestCase):
                 Field('id_1', 'int', primary_key=True),
                 Field('id_2', 'int', primary_key=True)
             ])
+
+    def test_check_insert(self):
+        fields = [
+            Field('id', 'int', primary_key=True),
+            Field('name', 'str')
+        ]
+
+        table = Table('users', fields)
+        table.insert(id=1, name='Pierre')
+
+        self.assertTrue(len(table.values) == 1)
+
+    def test_check_exception_if_not_nullable_field_missing(self):
+        fields = [
+            Field('id', 'int', primary_key=True),
+            Field('name', 'str')
+        ]
+
+        table = Table('users', fields)
+        with self.assertRaises(Exception):
+            table.insert(name='Pierre')
+
+    def test_check_no_exception_if_nullable_field_missing(self):
+        fields = [
+            Field('id', 'int', primary_key=True),
+            Field('name', 'str'),
+            Field('age', 'int', nullable=True)
+        ]
+
+        table = Table('users', fields)
+        table.insert(id=5, name='Pierre')
+
+    def test_check_exception_if_wrong_type(self):
+        fields = [
+            Field('id', 'int', primary_key=True),
+            Field('name', 'str')
+        ]
+
+        table = Table('users', fields)
+        with self.assertRaises(Exception):
+            table.insert(id='test', name='Pierre')

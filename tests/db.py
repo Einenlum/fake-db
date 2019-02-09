@@ -12,3 +12,22 @@ class TestDb(TestCase):
         ])
 
         db = Db([table])
+
+    def test_insert(self):
+        table = Table('users', [
+            Field('id', 'int', primary_key=True),
+            Field('name', 'str'),
+            Field('age', 'int', nullable=True)
+        ])
+
+        db = Db([table])
+        db.insert('users', id=2, name='Roger')
+
+    def test_exception_if_table_does_not_exist(self):
+        table = Table('users', [
+            Field('id', 'int', primary_key=True)
+        ])
+
+        db = Db([table])
+        with self.assertRaises(Exception):
+            db.insert('despacito', id=2)
