@@ -7,7 +7,7 @@ class TestDb(TestCase):
     def test_instanciation(self):
         table = Table('users', [
             Field('id', 'int', primary_key=True),
-            Field('name', 'string'),
+            Field('name', 'str'),
             Field('age', 'int', nullable=True)
         ])
 

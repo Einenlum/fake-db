@@ -6,19 +6,19 @@ class TestTable(TestCase):
     def test_normal_instanciation(self):
         fields = [
             Field('id', 'int', primary_key=True),
-            Field('name', 'string')
+            Field('name', 'str')
         ]
 
         table = Table('table_name', fields)
 
     def test_instanciation_with_bad_primary_key_config(self):
         fields = [
-            Field('name', 'string')
+            Field('name', 'str')
         ]
 
         # No primary key
         with self.assertRaises(Exception):
-            table = Table('table_name', [Field('name', 'string')])
+            table = Table('table_name', [Field('name', 'str')])
 
         # Several primary keys
         with self.assertRaises(Exception):

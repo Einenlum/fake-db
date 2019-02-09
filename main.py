@@ -4,8 +4,8 @@ from src.db import Db
 
 fields = [
     Field('id', 'int', primary_key=True),
-    Field('name', 'string'),
-    Field('city', 'string', nullable=True),
+    Field('name', 'str'),
+    Field('city', 'str', nullable=True),
     Field('activated', 'bool')
 ]
 table = Table('users', fields)
