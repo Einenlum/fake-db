@@ -1,10 +1,6 @@
 from typing import List
-from .field import Field
+from .table import Table
 
 class Db:
-    def __init__(self, fields: List[Field]):
-        self.fields = fields
-
-    def __is_initiated(self):
-        return len(self.fields) > 0
-
+    def __init__(self, tables: List[Table]):
+        self.tables = tables
