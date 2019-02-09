@@ -67,3 +67,19 @@ class TestTable(TestCase):
         table = Table('users', fields)
         with self.assertRaises(Exception):
             table.insert(id='test', name='Pierre')
+
+    def test_export(self):
+        fields = [
+            Field('id', 'int', primary_key=True),
+            Field('name', 'str'),
+            Field('age', 'int', nullable=True)
+        ]
+
+        table = Table('users', fields)
+        table.insert(id=5, name='Pierre')
+        table.insert(id=6, name='Roger')
+
+        self.assertEqual(table.export(), [
+            {'id': 5, 'name': 'Pierre'},
+            {'id': 6, 'name': 'Roger'}
+        ])

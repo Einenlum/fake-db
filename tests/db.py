@@ -31,3 +31,19 @@ class TestDb(TestCase):
         db = Db([table])
         with self.assertRaises(Exception):
             db.insert('despacito', id=2)
+
+    def test_export(self):
+        table = Table('users', [
+            Field('id', 'int', primary_key=True),
+            Field('name', 'str')
+        ])
+
+        db = Db([table])
+        db.insert('users', id=1, name='Roger')
+        db.insert('users', id=2, name='Pierre')
+        self.assertEqual(db.export(), [
+            {'users': [
+                {'id': 1, 'name': 'Roger'},
+                {'id': 2, 'name': 'Pierre'}
+            ]}
+        ])

@@ -10,6 +10,9 @@ class Db:
 
         table.insert(**row_values)
 
+    def export(self):
+        return [{table.name: table.export()} for table in self.tables]
+
     def __get_table(self, table_name: str) -> Table:
         try:
             return [table for table in self.tables if table.name == table_name][0]

@@ -24,6 +24,9 @@ class Table:
             **values
         })
 
+    def export(self):
+        return self.values
+
     def __get_missing_fields_names(self, fields_names):
         return [field.name for field in self.fields if
                                 field.name not in fields_names]
