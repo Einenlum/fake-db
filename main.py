@@ -7,6 +7,7 @@ fields = [
     Field('city', 'string', nullable=True),
     Field('activated', 'bool')
 ]
-Db.init(fields)
+
+db = Db(fields)
 
 print(Db)
