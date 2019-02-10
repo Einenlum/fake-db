@@ -93,7 +93,7 @@ class TestTable(TestCase):
             {'id': 2, 'name': 'Martine'}
         ]
 
-        self.assertEqual(table.get_with_value('name', 'José'), [])
+        self.assertEqual(table.get_with_values(name='José'), [])
 
     def test_get_with_matching_search(self):
         field = mock.Mock(spec=Field)
@@ -104,6 +104,6 @@ class TestTable(TestCase):
             {'id': 2, 'name': 'Martine'}
         ]
 
-        self.assertEqual(table.get_with_value('name', 'Martine'), [
+        self.assertEqual(table.get_with_values(name='Martine'), [
             {'id': 2, 'name': 'Martine'}
         ])

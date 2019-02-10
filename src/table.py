@@ -27,8 +27,11 @@ class Table:
     def export(self):
         return self.values
 
-    def get_with_value(self, field_name, matching_value) -> List[dict]:
-        matching_rows = [row for row in self.values if row[field_name] == matching_value]
+    def get_with_values(self, **filters) -> List[dict]:
+        filter_method = lambda x: len([True
+            for filter_name, value in filters.items()
+            if x[filter_name] != value]) == 0
+        matching_rows = list(filter(filter_method, self.values))
 
         return matching_rows
 
