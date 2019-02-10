@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, mock
 from src.table import Table
 from src.field import Field
 
@@ -82,4 +82,28 @@ class TestTable(TestCase):
         self.assertEqual(table.export(), [
             {'id': 5, 'name': 'Pierre'},
             {'id': 6, 'name': 'Roger'}
+        ])
+
+    def test_get_with_non_matching_search(self):
+        field = mock.Mock(spec=Field)
+        field.primary_key = True
+        table = Table('users', [field])
+        table.values = [
+            {'id': 1, 'name': 'Pascal'},
+            {'id': 2, 'name': 'Martine'}
+        ]
+
+        self.assertEqual(table.get_with_value('name', 'José'), [])
+
+    def test_get_with_matching_search(self):
+        field = mock.Mock(spec=Field)
+        field.primary_key = True
+        table = Table('users', [field])
+        table.values = [
+            {'id': 1, 'name': 'Pascal'},
+            {'id': 2, 'name': 'Martine'}
+        ]
+
+        self.assertEqual(table.get_with_value('name', 'Martine'), [
+            {'id': 2, 'name': 'Martine'}
         ])

@@ -27,6 +27,11 @@ class Table:
     def export(self):
         return self.values
 
+    def get_with_value(self, field_name, matching_value) -> List[dict]:
+        matching_rows = [row for row in self.values if row[field_name] == matching_value]
+
+        return matching_rows
+
     def __get_missing_fields_names(self, fields_names):
         return [field.name for field in self.fields if
                                 field.name not in fields_names]
